@@ -35,7 +35,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Struk (
 
 # Membuat Table Produk 
 cur.execute("""CREATE TABLE IF NOT EXISTS Produk (
-                Kode_Produk INT NOT NULL PRIMARY KEY,
+                Kode_Produk INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 Nama_Produk VARCHAR(50), 
                 Jenis_Produk VARCHAR(20),
                 Harga_Produk DECIMAL(10, 2)
@@ -154,10 +154,11 @@ while True:
         Harga_Produk = harga_produk  
 
         try:
-            cur.execute("""INSERT INTO Produk (Kode_Produk, Nama_Produk, Jenis_Produk, Harga_Produk) 
-                            VALUES (%s, %s, %s, %s)""", 
-                            [pilihan_produk, Nama_Produk, jenis_produk, Harga_Produk])
+            cur.execute("""INSERT INTO Produk (Nama_Produk, Jenis_Produk, Harga_Produk) 
+                VALUES (%s, %s, %s)""", 
+                [Nama_Produk, jenis_produk, Harga_Produk])
             conn.commit()
+
             print("Produk berhasil ditambahkan!")
         except mysql.connector.Error as err:
             print(f"Error: {err}")
